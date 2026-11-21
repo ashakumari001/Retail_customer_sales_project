@@ -93,7 +93,7 @@ if numeric_cols:
     stats["Variance"] = filtered[numeric_cols].var()
     stats["IQR"] = filtered[numeric_cols].quantile(.75) - filtered[numeric_cols].quantile(.25)
     st.dataframe(stats.round(2), use_container_width=True)
-    st.download_button("Download statistics", stats.round(2).to_csv().encode(), "descriptive_statistics.csv", "text/csv")
+    st.download_button("Download statistics", stats.round(2).to_csv().encode(), "descriptive_statistics.csv", "text/csv", key="download_statistics_section")
 else:
     st.info("Numeric columns nahi mile.")
 
@@ -212,12 +212,12 @@ else:
 
 # 10 Downloads
 st.header("10. Download Reports")
-st.download_button("Download full dataset", df.to_csv(index=False).encode(), "retail_analysis_dataset.csv", "text/csv")
-st.download_button("Download filtered dataset", filtered.to_csv(index=False).encode(), "filtered_retail_dataset.csv", "text/csv")
+st.download_button("Download full dataset", df.to_csv(index=False).encode(), "retail_analysis_dataset.csv", "text/csv", key="download_full_dataset")
+st.download_button("Download filtered dataset", filtered.to_csv(index=False).encode(), "filtered_retail_dataset.csv", "text/csv", key="download_filtered_dataset")
 if not stats.empty:
-    st.download_button("Download statistics", stats.round(2).to_csv().encode(), "descriptive_statistics.csv", "text/csv")
+    st.download_button("Download statistics", stats.round(2).to_csv().encode(), "descriptive_statistics.csv", "text/csv", key="download_statistics_report")
 if not outlier_df.empty:
-    st.download_button("Download outlier report", outlier_df.to_csv(index=False).encode(), "outlier_summary.csv", "text/csv")
+    st.download_button("Download outlier report", outlier_df.to_csv(index=False).encode(), "outlier_summary.csv", "text/csv", key="download_outlier_report")
 
 st.success("✅ Retail EDA Dashboard Loaded Successfully!")
 st.caption("Retail Customer Sales | Exploratory Data Analysis")
