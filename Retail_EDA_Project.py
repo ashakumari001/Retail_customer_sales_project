@@ -434,13 +434,15 @@ if business_tables:
 
     for title, table in business_tables.items():
 
-        st.subheader(title)
+    st.subheader(title)
 
-        st.dataframe(
-            table.round(2).to_frame(),
-            use_container_width=True
-        )
+    if isinstance(table, pd.Series):
+        table = table.to_frame()
 
+    st.dataframe(
+        table.round(2),
+        use_container_width=True
+    )
 else:
     st.info("Required business analysis columns not found.")
 
